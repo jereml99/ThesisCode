@@ -4,7 +4,7 @@
     {
       "name": "Survey",
       "papers": [
-        "LMs as Planning Modelers (Jiang et al.)"
+        "Language Models as Planning Modelers - A Survey (Marcus Tantakoun et al., 2025)"
       ]
     },
     {
@@ -13,15 +13,15 @@
         {
           "name": "MCTS",
           "papers": [
-            "Fast & Accurate Task Planning (Guan et al.)",
-            "LLMs as Commonsense Knowledge (Ahn et al.)",
-            "Cost-Augmented MCTS (Yao et al.)"
+            "Fast and Accurate Task Planning using Neuro-Symbolic Language Models and Multi-level Goal Decomposition (Minseo Kwon et al., 2024)",
+            "Large Language Models as Commonsense Knowledge for Large-Scale Task Planning (Zirui Zhao et al., 2023)",
+            "Cost-Augmented Monte Carlo Tree Search for LLM-Assisted Planning (Zihao Zhang & Fei Liu, 2025)"
           ]
         },
         {
           "name": "Knowledge Graph",
           "papers": [
-            "Plan-on-Graph (Han et al.)"
+            "Plan-on-Graph: Self-Correcting Adaptive Planning of Large Language Model on Knowledge Graphs (Liyi Chen et al., 2024)"
           ]
         }
       ]
@@ -29,9 +29,9 @@
     {
       "name": "Task Decomposition",
       "papers": [
-        "Fast & Accurate Task Planning (Guan et al.)",
-        "LLaMAR (Mishra et al.)",
-        "Plan-on-Graph (Han et al.)"
+        "Fast and Accurate Task Planning using Neuro-Symbolic Language Models and Multi-level Goal Decomposition (Minseo Kwon et al., 2024)",
+        "LLaMAR: Long-Horizon Planning for Multi-Agent Robots in Partially Observable Environments (Siddharth Nayak et al., 2024)",
+        "Plan-on-Graph: Self-Correcting Adaptive Planning of Large Language Model on Knowledge Graphs (Liyi Chen et al., 2024)"
       ]
     },
     {
@@ -40,13 +40,13 @@
         {
           "name": "Task Modeling",
           "papers": [
-            "Fast & Accurate Task Planning (Guan et al.)"
+            "Fast and Accurate Task Planning using Neuro-Symbolic Language Models and Multi-level Goal Decomposition (Minseo Kwon et al., 2024)"
           ]
         },
         {
           "name": "Hybrid Modeling",
           "papers": [
-            "Planning in the Dark (Song et al.)"
+            "Planning in the Dark: LLM-Symbolic Planning Pipeline without Experts (Sukai Huang et al., 2024)"
           ]
         }
       ]
@@ -54,16 +54,16 @@
     {
       "name": "LLM-based Agents",
       "papers": [
-        "LLaMAR (Mishra et al.)",
-        "Generative Agents (Park et al.)",
-        "AgentSociety (Zhou et al.)",
-        "Generative Agent Simulations (Aher et al.)"
+        "LLaMAR: Long-Horizon Planning for Multi-Agent Robots in Partially Observable Environments (Siddharth Nayak et al., 2024)",
+        "Generative Agents: Interactive Simulacra of Human Behavior (Joon Sung Park et al., 2023)",
+        "AgentSociety: Large-Scale LLM-Driven Social Simulation (Jinghua Piao et al., 2024)",
+        "Generative Agent Simulations of 1,000 People (Joon Sung Park et al., 2024)"
       ]
     },
     {
       "name": "Foundational",
       "papers": [
-        "Epistemic Planning Intro (van Ditmarsch et al.)"
+        "A Gentle Introduction to Epistemic Planning: The DEL Approach (Thomas Bolander, 2017)"
       ]
     }
   ]
