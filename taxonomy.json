@@ -8,6 +8,14 @@
       ]
     },
     {
+      "name": "LLM as planner",
+      "papers": [
+        "LLaMAR: Long-Horizon Planning for Multi-Agent Robots in Partially Observable Environments (Siddharth Nayak et al., 2024)",
+        "Generative Agents: Interactive Simulacra of Human Behavior (Joon Sung Park et al., 2023)",
+        "AgentSociety: Large-Scale LLM-Driven Social Simulation (Jinghua Piao et al., 2024)"
+      ]
+    },
+    {
       "name": "LLM as Heuristic",
       "children": [
         {
@@ -24,14 +32,6 @@
             "Plan-on-Graph: Self-Correcting Adaptive Planning of Large Language Model on Knowledge Graphs (Liyi Chen et al., 2024)"
           ]
         }
-      ]
-    },
-    {
-      "name": "Preapering task for planning",
-      "papers": [
-        "Fast and Accurate Task Planning using Neuro-Symbolic Language Models and Multi-level Goal Decomposition (Minseo Kwon et al., 2024)",
-        "LLaMAR: Long-Horizon Planning for Multi-Agent Robots in Partially Observable Environments (Siddharth Nayak et al., 2024)",
-        "Plan-on-Graph: Self-Correcting Adaptive Planning of Large Language Model on Knowledge Graphs (Liyi Chen et al., 2024)"
       ]
     },
     {
@@ -52,12 +52,29 @@
       ]
     },
     {
-      "name": "LLM-based Agents",
+      "name": "LLM as Preprocessor",
       "papers": [
+        "Fast and Accurate Task Planning using Neuro-Symbolic Language Models and Multi-level Goal Decomposition (Minseo Kwon et al., 2024)",
         "LLaMAR: Long-Horizon Planning for Multi-Agent Robots in Partially Observable Environments (Siddharth Nayak et al., 2024)",
-        "Generative Agents: Interactive Simulacra of Human Behavior (Joon Sung Park et al., 2023)",
-        "AgentSociety: Large-Scale LLM-Driven Social Simulation (Jinghua Piao et al., 2024)",
-        "Generative Agent Simulations of 1,000 People (Joon Sung Park et al., 2024)"
+        "Plan-on-Graph: Self-Correcting Adaptive Planning of Large Language Model on Knowledge Graphs (Liyi Chen et al., 2024)"
+      ]
+    },
+    {
+      "name": "Personality",
+      "children": [
+        {
+          "name": "Agents & Personality",
+          "papers": [
+            "Generative Agents: Interactive Simulacra of Human Behavior (Joon Sung Park et al., 2023)",
+            "AgentSociety: Large-Scale LLM-Driven Social Simulation (Jinghua Piao et al., 2024)"
+          ]
+        },
+        {
+          "name": "AI Mimicking Humans (Non-Agentic)",
+          "papers": [
+            "Generative Agent Simulations of 1,000 People (Joon Sung Park et al., 2024)"
+          ]
+        }
       ]
     },
     {

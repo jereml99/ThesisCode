@@ -17,18 +17,23 @@ COLOR_MAP = {
     "Survey": "#8ecae6",
     "LLM as Heuristic": "#ffb703",
     "Foundational": "#adb5bd",
-    "Task Decomposition": "#a9c9b4",
+    "LLM as Preprocessor": "#a9c9b4",
     "LLM as Modeler": "#f28482",
-    "LLM-based Agents": "#bde0fe"
+    "Personality": "#bde0fe",
+    "LLM as planner": "#e9c46a"  # Added color for new category
 }
 OUTPUT_FILENAME = 'taxonomy_final.png'
+
+# Maximum number of symbols for node and paper labels
+MAX_NODE_LENGTH = 60  
+MAX_PAPER_LENGTH = 60  
 
 def load_taxonomy(filename="taxonomy.json"):
     """Loads the taxonomy data from a JSON file."""
     with open(filename, 'r') as f:
         return json.load(f)
 
-def truncate_label(text, max_length=30):
+def truncate_label(text, max_length):
     """
     Truncate text to max_length, adding '...' if needed.
     Always preserve author/date in parentheses at the end for papers.
@@ -63,7 +68,7 @@ def add_nodes_edges(dot, node, parent_id, parent_color=None):
     # Draw the category node, then a separate leaf node for the papers.
     if 'papers' in node:
         # Draw the category node
-        label = truncate_label(node_name)
+        label = truncate_label(node_name, max_length=MAX_NODE_LENGTH)
         dot.node(node_id, label=label, fillcolor=color or "#ffffff")
         dot.edge(parent_id, node_id)
         
@@ -71,7 +76,7 @@ def add_nodes_edges(dot, node, parent_id, parent_color=None):
         papers_node_id = f"papers_{node_id}"
         paper_list = []
         for p in node['papers']:
-            paper_label = truncate_label(p, max_length=50)
+            paper_label = truncate_label(p, max_length=MAX_PAPER_LENGTH)
             paper_label = f"• {paper_label}\\l"  # Add bullet point and line break
             paper_list.append(paper_label)
         papers_label = "".join(paper_list)
@@ -87,7 +92,7 @@ def add_nodes_edges(dot, node, parent_id, parent_color=None):
     # Case 2: Node is an intermediate category with children.
     # Draw it and recurse into its children.
     elif 'children' in node:
-        label = truncate_label(node_name)
+        label = truncate_label(node_name, max_length=MAX_NODE_LENGTH)
         # For the structural nodes ("Foundations & Heuristics", etc.), use a plain style
         style = {'fillcolor': color or '#ffffff', 'style': 'filled,dashed', 'fontstyle': 'italic'} if not COLOR_MAP.get(node_name) else {'fillcolor': color}
         dot.node(node_id, label=label, **style)
