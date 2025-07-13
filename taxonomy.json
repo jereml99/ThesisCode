@@ -1,28 +1,76 @@
 {
-  "name": "LLM Model Construction (§3)",
+  "name": "Paper Classification",
   "children": [
     {
-      "name": "Model Generation (§3.1)",
+      "name": "Survey",
+      "children": [
+        { "name": "Language Models as Planning Modelers – A Survey" }
+      ]
+    },
+    {
+      "name": "LLM as a heuristic",
       "children": [
         {
-          "name": "Task Modeling (§3.1.1)",
+          "name": "MCTS",
           "children": [
-            { "name": "Collins et al. (2022)" },
-            { "name": "Grover and Mohan (2024)" }
+            { "name": "Fast and Accurate Task Planning using Neuro-Symbolic Language Models and Multi-level Goal Decomposition" },
+            { "name": "Large Language Models as Commonsense Knowledge for Large-Scale Task Planning (The foundation paper)" },
+            { "name": "Cost-Augmented Monte Carlo Tree Search for LLM-Assisted Planning" }
           ]
         },
         {
-          "name": "Domain Modeling (§3.1.2)",
+          "name": "Knowledge graph",
           "children": [
-            { "name": "Kalland (2024)" }
+            { "name": "Plan-on-Graph: Adaptive Planning of LLMs on Knowledge Graphs" }
           ]
         }
       ]
     },
     {
-      "name": "Model Editing (§3.2)",
+      "name": "LLM used for decomposing tasks into subgoals",
       "children": [
-        { "name": "Gragera and Pozanco (2023)" }
+        { "name": "Fast and Accurate Task Planning using Neuro-Symbolic Language Models and Multi-level Goal Decomposition" },
+        { "name": "LLaMAR: Long-Horizon Planning for Multi-Agent Robotics" },
+        { "name": "Plan-on-Graph: Adaptive Planning of LLMs on Knowledge Graphs" }
+      ]
+    },
+    {
+      "name": "LLM as a modeler",
+      "children": [
+        {
+          "name": "Task modeling",
+          "children": [
+            { "name": "Fast and Accurate Task Planning using Neuro-Symbolic Language Models and Multi-level Goal Decomposition (The domain is provided as an input)" }
+          ]
+        },
+        {
+          "name": "Hybrid modeling",
+          "children": [
+            { "name": "Planning in the Dark: LLM-Symbolic Planning Pipeline without Experts" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LLM as planner",
+      "children": [
+        { "name": "LLaMAR: Long-Horizon Planning for Multi-Agent Robotics" },
+        { "name": "Generative Agents: Interactive Simulacra of Human Behavior" },
+        { "name": "AgentSociety: Large-Scale LLM-Driven Social Simulation" }
+      ]
+    },
+    {
+      "name": "Personality introduction",
+      "children": [
+        { "name": "Generative Agents: Interactive Simulacra of Human Behavior" },
+        { "name": "AgentSociety: Large-Scale LLM-Driven Social Simulation" },
+        { "name": "Generative Agent Simulations of 1,000 People" }
+      ]
+    },
+    {
+      "name": "Other foundational papers",
+      "children": [
+        { "name": "A Gentle Introduction to Epistemic Planning: The DEL Approach" }
       ]
     }
   ]
