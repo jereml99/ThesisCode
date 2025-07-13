@@ -28,7 +28,7 @@ def load_taxonomy(filename="taxonomy.json"):
     with open(filename, 'r') as f:
         return json.load(f)
 
-def add_nodes_edges(dot, node, parent_id):
+def add_nodes_edges(dot, node, parent_id, parent_color=None):
     """
     Recursively adds nodes and edges to the graph.
     - Separates category nodes from leaf nodes containing paper lists.
@@ -36,7 +36,8 @@ def add_nodes_edges(dot, node, parent_id):
     """
     node_id = str(id(node))
     node_name = node['name']
-    color = COLOR_MAP.get(node_name) # Get color if it's a main category
+    # Use parent's color if available, otherwise get from COLOR_MAP
+    color = COLOR_MAP.get(node_name) or parent_color
 
     # Case 1: Node is a category with papers.
     # Draw the category node, then a separate leaf node for the papers.
@@ -62,12 +63,12 @@ def add_nodes_edges(dot, node, parent_id):
     # Draw it and recurse into its children.
     elif 'children' in node:
         # For the structural nodes ("Foundations & Heuristics", etc.), use a plain style
-        style = {'fillcolor': '#ffffff', 'style': 'filled,dashed', 'fontstyle': 'italic'} if not color else {'fillcolor': color}
+        style = {'fillcolor': color or '#ffffff', 'style': 'filled,dashed', 'fontstyle': 'italic'} if not COLOR_MAP.get(node_name) else {'fillcolor': color}
         dot.node(node_id, label=node_name, **style)
         dot.edge(parent_id, node_id)
         
         for child in node['children']:
-            add_nodes_edges(dot, child, node_id)
+            add_nodes_edges(dot, child, node_id, color)
 
 
 def main():
@@ -80,13 +81,15 @@ def main():
 
     output_format = OUTPUT_FILENAME.split('.')[-1]
     dot = Digraph(format=output_format)
-    dot.attr(rankdir='TB', splines='ortho')
+    dot.attr(rankdir='LR', splines='ortho', ranksep='0.05', nodesep='0.2')
     dot.attr('node', 
              shape='box', 
              style='rounded,filled', 
              fontname='Arial', 
              fontsize='10',
              margin='0.2')
+    dot.attr(concentrate='true')
+
     dot.attr('edge', arrowhead='vee', arrowsize='0.7')
 
     # Draw the root node
@@ -102,7 +105,7 @@ def main():
     # Start the recursive drawing process from the root's children
     if 'children' in data:
         for child in data['children']:
-            add_nodes_edges(dot, child, root_id)
+            add_nodes_edges(dot, child, root_id, COLOR_MAP.get(data['name']))
 
     # Render the final graph
     output_base = OUTPUT_FILENAME.split('.')[0]
