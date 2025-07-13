@@ -1,0 +1,29 @@
+{
+  "name": "LLM Model Construction (§3)",
+  "children": [
+    {
+      "name": "Model Generation (§3.1)",
+      "children": [
+        {
+          "name": "Task Modeling (§3.1.1)",
+          "children": [
+            { "name": "Collins et al. (2022)" },
+            { "name": "Grover and Mohan (2024)" }
+          ]
+        },
+        {
+          "name": "Domain Modeling (§3.1.2)",
+          "children": [
+            { "name": "Kalland (2024)" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Model Editing (§3.2)",
+      "children": [
+        { "name": "Gragera and Pozanco (2023)" }
+      ]
+    }
+  ]
+}
