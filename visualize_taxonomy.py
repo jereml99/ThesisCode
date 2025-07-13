@@ -1,122 +1,113 @@
 #!/usr/bin/env python3
 """
-Taxonomy Hierarchy Visualizer for Presentations (Grouped Papers)
+Taxonomy Hierarchy Visualizer (Final Slide Version)
 
 Dependencies:
     pip install graphviz
     # Also install Graphviz system package (e.g., sudo apt install graphviz)
 
 Usage:
-    python visualize_taxonomy_grouped.py
-
-Reads 'taxonomy.json' and groups papers under their final category into a single node.
+    python visualize_taxonomy_final.py
 """
 import json
 from graphviz import Digraph
 
-# A vibrant color palette suitable for presentations
-TOP_LEVEL_COLORS = ['#ffbe0b', '#fb5607', '#ff006e', '#8338ec', '#3a86ff', '#43aa8b']
-OUTPUT_FILENAME = 'taxonomy_grouped.png'
+# Colors are now mapped to specific categories for consistency
+COLOR_MAP = {
+    "Survey": "#8ecae6",
+    "LLM as Heuristic": "#ffb703",
+    "Foundational": "#adb5bd",
+    "Task Decomposition": "#a9c9b4",
+    "LLM as Modeler": "#f28482",
+    "LLM-based Agents": "#bde0fe"
+}
+OUTPUT_FILENAME = 'taxonomy_final.png'
 
 def load_taxonomy(filename="taxonomy.json"):
     """Loads the taxonomy data from a JSON file."""
     with open(filename, 'r') as f:
         return json.load(f)
 
-def add_nodes_edges(dot, node, parent=None, color=None):
+def add_nodes_edges(dot, node, parent_id):
     """
     Recursively adds nodes and edges to the graph.
-    If a node contains a 'papers' list, it's treated as a single, formatted leaf node.
+    - Separates category nodes from leaf nodes containing paper lists.
+    - Handles nested structures and applies consistent coloring.
     """
     node_id = str(id(node))
-    
-    # If the node is a final category with papers, create one grouped node
+    node_name = node['name']
+    color = COLOR_MAP.get(node_name) # Get color if it's a main category
+
+    # Case 1: Node is a category with papers.
+    # Draw the category node, then a separate leaf node for the papers.
     if 'papers' in node:
-        # Format the label with the category name and a bulleted list of papers.
-        # The '\l' escape character creates left-justified newlines.
+        # Draw the category node
+        dot.node(node_id, label=node_name, fillcolor=color or "#ffffff")
+        dot.edge(parent_id, node_id)
+        
+        # Create a new leaf node just for the papers
+        papers_node_id = f"papers_{node_id}"
         paper_list = [f"• {p}\\l" for p in node['papers']]
-        label = f"**{node['name']}**\\n\\n" + "".join(paper_list) # Use ** for bold in some renderers, or just for emphasis
-        label = f"{node['name']}\\l\\l" + "".join(paper_list)
+        papers_label = "".join(paper_list)
+        
+        dot.node(papers_node_id, 
+                 label=papers_label, 
+                 shape='note',
+                 fillcolor="#f8f9fa",
+                 fontname='Arial',
+                 align='left')
+        dot.edge(node_id, papers_node_id)
 
-
-        node_kwargs = {
-            'label': label,
-            'shape': 'box',
-            'style': 'filled,rounded',
-            'fillcolor': color or '#f0f0f0',
-            'fontname': 'Arial',
-            'align': 'left' # Crucial for left-justified text
-        }
-        dot.node(node_id, **node_kwargs)
-
-    # If it's a regular intermediate category, process it and its children
-    else:
-        node_kwargs = {
-            'label': node['name'],
-            'color': color or '#cccccc',
-            'style': 'filled',
-            'fillcolor': color or '#cccccc'
-        }
-        dot.node(node_id, **node_kwargs)
-        if 'children' in node:
-            for child in node['children']:
-                # Pass the parent's color down to the children
-                add_nodes_edges(dot, child, node_id, color)
-
-    if parent:
-        dot.edge(parent, node_id)
+    # Case 2: Node is an intermediate category with children.
+    # Draw it and recurse into its children.
+    elif 'children' in node:
+        # For the structural nodes ("Foundations & Heuristics", etc.), use a plain style
+        style = {'fillcolor': '#ffffff', 'style': 'filled,dashed', 'fontstyle': 'italic'} if not color else {'fillcolor': color}
+        dot.node(node_id, label=node_name, **style)
+        dot.edge(parent_id, node_id)
+        
+        for child in node['children']:
+            add_nodes_edges(dot, child, node_id)
 
 
 def main():
-    """Main function to generate the taxonomy graph."""
+    """Main function to generate the final taxonomy graph."""
     try:
         data = load_taxonomy()
     except FileNotFoundError:
         print(f"Error: 'taxonomy.json' not found. Please create this file.")
         return
-        
+
     output_format = OUTPUT_FILENAME.split('.')[-1]
-    dot = Digraph(format=output_format, graph_attr={'splines': 'ortho'})
-    dot.attr(rankdir='TB')  # Top-to-Bottom layout
+    dot = Digraph(format=output_format)
+    dot.attr(rankdir='TB', splines='ortho')
     dot.attr('node', 
              shape='box', 
              style='rounded,filled', 
              fontname='Arial', 
              fontsize='10',
-             margin='0.25') # Increased margin for readability
+             margin='0.2')
     dot.attr('edge', arrowhead='vee', arrowsize='0.7')
-    
-    # Style for the root node
+
+    # Draw the root node
     root_id = str(id(data))
-    dot.node(root_id, 
-             label=data['name'], 
-             shape='box', 
-             style='filled,bold', 
-             fillcolor='#003049', 
+    dot.node(root_id,
+             label=data['name'],
+             shape='box',
+             style='filled,bold',
+             fillcolor='#212529',
              fontcolor='white',
              fontsize='12')
-             
+
+    # Start the recursive drawing process from the root's children
     if 'children' in data:
-        for idx, child in enumerate(data['children']):
-            color = TOP_LEVEL_COLORS[idx % len(TOP_LEVEL_COLORS)]
-            # The top-level nodes are intermediate, so they are drawn first
-            top_level_id = str(id(child))
-            dot.node(top_level_id, label=child['name'], fillcolor=color)
-            dot.edge(root_id, top_level_id)
-            # Process the children of the top-level nodes
-            if 'children' in child:
-                 for sub_child in child['children']:
-                     add_nodes_edges(dot, sub_child, top_level_id, color)
-            # If the top-level node has papers directly
-            elif 'papers' in child:
-                add_nodes_edges(dot, child, root_id)
+        for child in data['children']:
+            add_nodes_edges(dot, child, root_id)
 
-
-            
-    # Render the graph
+    # Render the final graph
     output_base = OUTPUT_FILENAME.split('.')[0]
     dot.render(output_base, view=False, cleanup=True)
-    print(f"Grouped taxonomy graph saved to {output_base}.{output_format}")
+    print(f"Final taxonomy graph saved to {output_base}.{output_format}")
 
 if __name__ == '__main__':
     main()
