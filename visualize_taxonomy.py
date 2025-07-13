@@ -28,6 +28,26 @@ def load_taxonomy(filename="taxonomy.json"):
     with open(filename, 'r') as f:
         return json.load(f)
 
+def truncate_label(text, max_length=30):
+    """
+    Truncate text to max_length, adding '...' if needed.
+    Always preserve author/date in parentheses at the end for papers.
+    """
+    if len(text) <= max_length:
+        return text
+    # For papers, preserve author/date in parentheses at the end
+    if '(' in text and text.endswith(')'):
+        idx = text.rfind('(')
+        main = text[:idx].strip()
+        suffix = text[idx:]
+        allowed = max_length - len(suffix) - 3  # 3 for '...'
+        if allowed < 1:
+            # If suffix is too long, just show suffix
+            return '...' + suffix
+        return main[:allowed] + '...' + suffix
+    # For other nodes, just truncate
+    return text[:max_length-3] + '...'
+
 def add_nodes_edges(dot, node, parent_id, parent_color=None):
     """
     Recursively adds nodes and edges to the graph.
@@ -43,12 +63,17 @@ def add_nodes_edges(dot, node, parent_id, parent_color=None):
     # Draw the category node, then a separate leaf node for the papers.
     if 'papers' in node:
         # Draw the category node
-        dot.node(node_id, label=node_name, fillcolor=color or "#ffffff")
+        label = truncate_label(node_name)
+        dot.node(node_id, label=label, fillcolor=color or "#ffffff")
         dot.edge(parent_id, node_id)
         
         # Create a new leaf node just for the papers
         papers_node_id = f"papers_{node_id}"
-        paper_list = [f"• {p}\\l" for p in node['papers']]
+        paper_list = []
+        for p in node['papers']:
+            paper_label = truncate_label(p, max_length=50)
+            paper_label = f"• {paper_label}\\l"  # Add bullet point and line break
+            paper_list.append(paper_label)
         papers_label = "".join(paper_list)
         
         dot.node(papers_node_id, 
@@ -62,9 +87,10 @@ def add_nodes_edges(dot, node, parent_id, parent_color=None):
     # Case 2: Node is an intermediate category with children.
     # Draw it and recurse into its children.
     elif 'children' in node:
+        label = truncate_label(node_name)
         # For the structural nodes ("Foundations & Heuristics", etc.), use a plain style
         style = {'fillcolor': color or '#ffffff', 'style': 'filled,dashed', 'fontstyle': 'italic'} if not COLOR_MAP.get(node_name) else {'fillcolor': color}
-        dot.node(node_id, label=node_name, **style)
+        dot.node(node_id, label=label, **style)
         dot.edge(parent_id, node_id)
         
         for child in node['children']:
@@ -81,7 +107,9 @@ def main():
 
     output_format = OUTPUT_FILENAME.split('.')[-1]
     dot = Digraph(format=output_format)
-    dot.attr(rankdir='LR', splines='ortho', ranksep='0.05', nodesep='0.2')
+    dot.attr(rankdir='LR', splines='ortho', ranksep='0.05', nodesep='0.2', compound='true')
+    dot.attr(strict='false')
+
     dot.attr('node', 
              shape='box', 
              style='rounded,filled', 
@@ -109,6 +137,7 @@ def main():
 
     # Render the final graph
     output_base = OUTPUT_FILENAME.split('.')[0]
+
     dot.render(output_base, view=False, cleanup=True)
     print(f"Final taxonomy graph saved to {output_base}.{output_format}")
 

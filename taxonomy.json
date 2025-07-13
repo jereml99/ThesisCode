@@ -27,7 +27,7 @@
       ]
     },
     {
-      "name": "Task Decomposition",
+      "name": "Preapering task for planning",
       "papers": [
         "Fast and Accurate Task Planning using Neuro-Symbolic Language Models and Multi-level Goal Decomposition (Minseo Kwon et al., 2024)",
         "LLaMAR: Long-Horizon Planning for Multi-Agent Robots in Partially Observable Environments (Siddharth Nayak et al., 2024)",
