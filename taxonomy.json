@@ -3,8 +3,8 @@
   "children": [
     {
       "name": "Survey",
-      "children": [
-        { "name": "LMs as Planning Modelers\n(Jiang et al.)" }
+      "papers": [
+        "LMs as Planning Modelers (Jiang et al.)"
       ]
     },
     {
@@ -12,26 +12,26 @@
       "children": [
         {
           "name": "MCTS",
-          "children": [
-            { "name": "Fast & Accurate Task Planning\n(Guan et al.)" },
-            { "name": "LLMs as Commonsense Knowledge\n(Ahn et al.)" },
-            { "name": "Cost-Augmented MCTS\n(Yao et al.)" }
+          "papers": [
+            "Fast & Accurate Task Planning (Guan et al.)",
+            "LLMs as Commonsense Knowledge (Ahn et al.)",
+            "Cost-Augmented MCTS (Yao et al.)"
           ]
         },
         {
           "name": "Knowledge Graph",
-          "children": [
-            { "name": "Plan-on-Graph\n(Han et al.)" }
+          "papers": [
+            "Plan-on-Graph (Han et al.)"
           ]
         }
       ]
     },
     {
       "name": "Task Decomposition",
-      "children": [
-        { "name": "Fast & Accurate Task Planning\n(Guan et al.)" },
-        { "name": "LLaMAR\n(Mishra et al.)" },
-        { "name": "Plan-on-Graph\n(Han et al.)" }
+      "papers": [
+        "Fast & Accurate Task Planning (Guan et al.)",
+        "LLaMAR (Mishra et al.)",
+        "Plan-on-Graph (Han et al.)"
       ]
     },
     {
@@ -39,31 +39,31 @@
       "children": [
         {
           "name": "Task Modeling",
-          "children": [
-            { "name": "Fast & Accurate Task Planning\n(Guan et al.)" }
+          "papers": [
+            "Fast & Accurate Task Planning (Guan et al.)"
           ]
         },
         {
           "name": "Hybrid Modeling",
-          "children": [
-            { "name": "Planning in the Dark\n(Song et al.)" }
+          "papers": [
+            "Planning in the Dark (Song et al.)"
           ]
         }
       ]
     },
     {
       "name": "LLM-based Agents",
-      "children": [
-        { "name": "LLaMAR\n(Mishra et al.)" },
-        { "name": "Generative Agents\n(Park et al.)" },
-        { "name": "AgentSociety\n(Zhou et al.)" },
-        { "name": "Generative Agent Simulations\n(Aher et al.)" }
+      "papers": [
+        "LLaMAR (Mishra et al.)",
+        "Generative Agents (Park et al.)",
+        "AgentSociety (Zhou et al.)",
+        "Generative Agent Simulations (Aher et al.)"
       ]
     },
     {
       "name": "Foundational",
-      "children": [
-        { "name": "Epistemic Planning Intro\n(van Ditmarsch et al.)" }
+      "papers": [
+        "Epistemic Planning Intro (van Ditmarsch et al.)"
       ]
     }
   ]
