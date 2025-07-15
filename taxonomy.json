@@ -23,7 +23,8 @@
           "papers": [
             "Fast and Accurate Task Planning using Neuro-Symbolic Language Models and Multi-level Goal Decomposition (Minseo Kwon et al., 2024)",
             "Large Language Models as Commonsense Knowledge for Large-Scale Task Planning (Zirui Zhao et al., 2023)",
-            "Cost-Augmented Monte Carlo Tree Search for LLM-Assisted Planning (Zihao Zhang & Fei Liu, 2025)"
+            "Cost-Augmented Monte Carlo Tree Search for LLM-Assisted Planning (Zihao Zhang & Fei Liu, 2025)",
+            "MASTER: A Multi-Agent System with LLM Specialized MCTS (Bingzheng Gan et al. 2024)"
           ]
         },
         {
@@ -66,13 +67,17 @@
           "name": "Agents & Personality",
           "papers": [
             "Generative Agents: Interactive Simulacra of Human Behavior (Joon Sung Park et al., 2023)",
-            "AgentSociety: Large-Scale LLM-Driven Social Simulation (Jinghua Piao et al., 2024)"
+            "AgentSociety: Large-Scale LLM-Driven Social Simulation (Jinghua Piao et al., 2024)",
+            "SANDMAN Deceptive Agents (Newsham & Prince, 2025)​",
+            "LLM Reasoner and Automated Planner: A new NPC approach (Puerta-Merino et al. 2025)",
+            "Personalized Non-Player Characters: A Framework for Character-Consistent Dialogue Generation (Xiao Liu et al., 2025)"
           ]
         },
         {
           "name": "AI Mimicking Humans (Non-Agentic)",
           "papers": [
-            "Generative Agent Simulations of 1,000 People (Joon Sung Park et al., 2024)"
+            "Generative Agent Simulations of 1,000 People (Joon Sung Park et al., 2024)",
+            "NPC Personality Emulation (Klinkert et al., 2024)"
           ]
         }
       ]
